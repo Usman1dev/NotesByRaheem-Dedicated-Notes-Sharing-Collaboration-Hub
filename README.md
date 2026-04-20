@@ -1,5 +1,5 @@
 # 📚 NotesByRaheem.xyz
-**The Dedicated Notes-Sharing & Collaboration Hub for **
+**The Dedicated Notes-Sharing & Collaboration Hub **
 
 NotesByRaheem.xyz is a centralized academic platform designed to streamline resource sharing and foster real-time collaboration among students. The system ensures high-quality study materials through administrative oversight and provides a modern space for class-wide discussion.
 
