@@ -62,13 +62,13 @@ src/
 ├── types/          # TypeScript interfaces for DB schema & Auth
 └── App.tsx         # Routing & Auth Provider logic
 
-##⚙️ Setup & Development
+## ⚙️ Setup & Development
 Prerequisites
   *Node.js (v18+)
 
   *Supabase Account & Project
 
-#Local Installation
+# Local Installation
 1.Clone the repository:
 
 Bash
