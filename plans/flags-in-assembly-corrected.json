@@ -1,0 +1,142 @@
+{
+  "title": "Flags in Assembly Language",
+  "lecture": "Week 3",
+  "course": "CS220",
+  "sections": [
+    {
+      "title": "Course Information",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Course Instructor: Romana Maroof\nEmail: Romana.maroof@au.edu.pk\nCourse: Computer Organization & Assembly Language"
+        }
+      ]
+    },
+    {
+      "title": "Objectives",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Understand the purpose of flags in the CPU",
+            "Learn about different types of flags in 8086",
+            "Demonstrate effect of instructions on flags",
+            "Write and execute programs that manipulate flags"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "What are Flags?",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "Flags are special bits in the Flag Register that are set (1) or cleared (0) after operations. They indicate processor status or result of an operation and influence control flow in programs."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Status Flags → Indicate results of arithmetic/logic instructions",
+            "Control Flags → Control CPU operation",
+            "System Flags → Manage operating system–level operations"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "EFLAGS Register",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "The EFLAGS register contains status flags (status of arithmetic and logical operations) and control/system flags (control CPU operation). Programs can set and clear individual bits in the EFLAGS register."
+        }
+      ]
+    },
+    {
+      "title": "Categories of Flags",
+      "blocks": [
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Status Flags: Zero Flag (ZF), Sign Flag (SF), Carry Flag (CF), Overflow Flag (OF), Parity Flag (PF)",
+            "Control Flags: Direction Flag (DF), Interrupt Flag (IF), Trap Flag (TF)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Status Flags",
+      "blocks": [
+        {
+          "type": "definition",
+          "term": "Carry Flag (CF)",
+          "definition": "Set when unsigned arithmetic result is out of range. Set when an unsigned arithmetic operation generates a carry out of the MSB (most significant bit) or a borrow in subtraction."
+        },
+        {
+          "type": "definition",
+          "term": "Overflow Flag (OF)",
+          "definition": "Set when signed arithmetic result is out of range. Set when a signed arithmetic operation results in a value too large/small to fit in destination register."
+        },
+        {
+          "type": "definition",
+          "term": "Sign Flag (SF)",
+          "definition": "Copy of sign bit. Set if the result is negative (MSB = 1 in signed interpretation)."
+        },
+        {
+          "type": "definition",
+          "term": "Zero Flag (ZF)",
+          "definition": "Set when result is zero."
+        },
+        {
+          "type": "definition",
+          "term": "Auxiliary Carry Flag (AF)",
+          "definition": "Set if there is a carry from bit 3 to bit 4 (used in BCD arithmetic)."
+        },
+        {
+          "type": "definition",
+          "term": "Parity Flag (PF)",
+          "definition": "Sums the number of bits that are set in a number, and indicates whether the sum is odd or even. Set when parity is even."
+        }
+      ]
+    },
+    {
+      "title": "Status Flag Examples",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "; Carry Flag Example\nMOV AL, 0FFH   ; 255 in AL\nADD AL, 01H    ; Result = 0, Carry = 1\n; CF = 1 because 255+1 = 256, out of 8-bit range\n\n; Overflow Flag Example\nMOV AL, 7FH    ; 127 (max positive signed 8-bit)\nADD AL, 01H    ; Result = -128, OF = 1\n; Because signed range is -128 to +127\n\n; Sign Flag Example\nMOV AL, 05H\nSUB AL, 07H    ; Result = -2 (FEH in hex)\n; SF = 1 because result is negative\n\n; Zero Flag Example\nMOV AL, 02H\nSUB AL, 02H    ; Result = 0\n; ZF = 1 because subtraction gave zero\n\n; Auxiliary Carry Example\nMOV AL, 09H\nADD AL, 01H    ; Result = 0AH, carry from bit 3 to 4\n; AF = 1\n\n; Parity Flag Example\nMOV AL, 04H    ; 00000100 (only 1 one → odd parity)\n; PF = 0\nXOR AL, AL     ; Result = 0 (00000000, 0 ones → even parity)\n; PF = 1"
+        }
+      ]
+    },
+    {
+      "title": "Control Flags",
+      "blocks": [
+        {
+          "type": "definition",
+          "term": "Direction Flag (DF)",
+          "definition": "Controls the direction in which string instructions (like MOVS, LODS, STOS, SCAS, CMPS) process data in memory. When DF = 0: String operations process forward (from lower to higher memory addresses). When DF = 1: String operations process backward (from higher to lower memory addresses)."
+        },
+        {
+          "type": "definition",
+          "term": "Interrupt Flag (IF)",
+          "definition": "Controls whether the CPU will respond to maskable hardware interrupts. When IF = 1: CPU responds to external interrupts. When IF = 0: CPU ignores external interrupts."
+        }
+      ]
+    },
+    {
+      "title": "Exercises",
+      "blocks": [
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Demonstrate Sign Flag using subtraction",
+            "Check Parity Flag after XOR",
+            "Modify Program 1 for Overflow Flag"
+          ]
+        }
+      ]
+    }
+  ]
+}

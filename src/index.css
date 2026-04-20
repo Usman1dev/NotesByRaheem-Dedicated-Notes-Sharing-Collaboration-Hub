@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 240 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+
+    --primary: 244 55% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 5% 92%;
+    --secondary-foreground: 240 10% 10%;
+
+    --muted: 240 5% 92%;
+    --muted-foreground: 240 5% 42%;
+
+    --accent: 244 55% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 160 59% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 45 93% 47%;
+    --warning-foreground: 0 0% 0%;
+
+    --info: 217 72% 55%;
+    --info-foreground: 0 0% 100%;
+
+    --pink: 330 66% 55%;
+    --pink-foreground: 0 0% 100%;
+
+    --border: 240 6% 90%;
+    --border-hover: 240 6% 80%;
+    --input: 240 5% 92%;
+    --ring: 244 55% 55%;
+
+    --radius: 0.75rem;
+    --radius-lg: 1.25rem;
+
+    --surface: 0 0% 100%;
+    --surface2: 240 5% 96%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 5% 42%;
+    --sidebar-primary: 244 55% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 244 55% 55% / 0.12;
+    --sidebar-accent-foreground: 244 55% 55%;
+    --sidebar-border: 240 6% 90%;
+    --sidebar-ring: 244 55% 55%;
+  }
+
+  .dark {
+    --background: 240 15% 4%;
+    --foreground: 250 30% 96%;
+
+    --card: 240 14% 7%;
+    --card-foreground: 250 30% 96%;
+
+    --popover: 240 14% 7%;
+    --popover-foreground: 250 30% 96%;
+
+    --primary: 244 55% 62%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 10% 12%;
+    --secondary-foreground: 250 30% 96%;
+
+    --muted: 240 10% 12%;
+    --muted-foreground: 245 10% 52%;
+
+    --accent: 244 55% 62%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 65%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 160 59% 52%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 45 93% 56%;
+    --warning-foreground: 0 0% 0%;
+
+    --info: 217 72% 72%;
+    --info-foreground: 0 0% 100%;
+
+    --pink: 330 66% 70%;
+    --pink-foreground: 0 0% 100%;
+
+    --border: 0 0% 100% / 0.07;
+    --border-hover: 0 0% 100% / 0.15;
+    --input: 240 10% 12%;
+    --ring: 244 55% 62%;
+
+    --radius: 0.75rem;
+    --radius-lg: 1.25rem;
+
+    --surface: 240 14% 7%;
+    --surface2: 240 11% 11%;
+
+    --sidebar-background: 240 14% 7%;
+    --sidebar-foreground: 245 10% 52%;
+    --sidebar-primary: 244 55% 62%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 244 55% 62% / 0.12;
+    --sidebar-accent-foreground: 244 55% 62%;
+    --sidebar-border: 0 0% 100% / 0.07;
+    --sidebar-ring: 244 55% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(108,99,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(108,99,255,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(108,99,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .dark body::before {
+    background-image:
+      linear-gradient(rgba(108,99,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(108,99,255,0.03) 1px, transparent 1px);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Syne', sans-serif;
+  }
+  .font-body {
+    font-family: 'DM Sans', sans-serif;
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease both;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.animate-fade-up-delay-4 {
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+
+/* Mobile-specific improvements */
+@layer utilities {
+  /* Prevent text overflow on small screens */
+  .break-word {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Better touch targets */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Responsive padding utilities */
+  .mobile-p-4 {
+    padding: 1rem;
+  }
+  
+  @media (max-width: 640px) {
+    .mobile-p-4 {
+      padding: 0.75rem;
+    }
+  }
+  
+  /* Hide on mobile, show on desktop */
+  .mobile-hidden {
+    display: none;
+  }
+  
+  @media (min-width: 768px) {
+    .mobile-hidden {
+      display: block;
+    }
+  }
+  
+  /* Show on mobile, hide on desktop */
+  .desktop-hidden {
+    display: block;
+  }
+  
+  @media (min-width: 768px) {
+    .desktop-hidden {
+      display: none;
+    }
+  }
+  
+  /* Responsive text sizes */
+  .mobile-text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  
+  @media (min-width: 640px) {
+    .mobile-text-sm {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+  }
+  
+  /* Prevent horizontal scroll on tables */
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Better form inputs on mobile */
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+  
+  /* Improve button tap targets */
+  button, .btn, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 640px) {
+  /* Reduce padding on small screens */
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Stack flex containers vertically */
+  .mobile-stack {
+    flex-direction: column !important;
+  }
+  
+  /* Full width on mobile */
+  .mobile-full {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Reduce gap sizes on mobile */
+  .mobile-gap-2 {
+    gap: 0.5rem;
+  }
+  
+  .mobile-gap-4 {
+    gap: 1rem;
+  }
+  
+  /* Smaller font sizes for headings on mobile */
+  h1 {
+    font-size: 1.75rem !important;
+    line-height: 2.25rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .tablet-stack {
+    flex-direction: column !important;
+  }
+}

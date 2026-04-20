@@ -1,0 +1,416 @@
+{
+  "title": "Introduction to Computer Organization and Assembly Language",
+  "lecture": "L01",
+  "course": "Computer Organization & Assembly Language (COAL)",
+  "sections": [
+    {
+      "id": "course-info",
+      "title": "Course Information",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": ["Assessment", "Weightage"],
+          "rows": [
+            ["Assignments", "10%"],
+            ["Mid Term", "25%"],
+            ["Quiz", "10%"],
+            ["Project", "10%"],
+            ["Final Exam", "45%"]
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "title": "Academic Integrity",
+          "content": "Plagiarized assignments and quizzes will be awarded straight zero."
+        },
+        {
+          "type": "text",
+          "content": "Textbooks: (1) Computer Organization and Architecture – William Stallings, 10th Ed. (2) Assembly Language for Intel-Based Computers – Kip Irvine, 7th Ed."
+        }
+      ]
+    },
+    {
+      "id": "architecture-definition",
+      "title": "Computer Architecture",
+      "blocks": [
+        {
+          "type": "definition",
+          "term": "Computer Architecture",
+          "definition": "The end-to-end structure of a computer system that determines how its components interact to execute the machine's purpose (processing data), without reference to actual technical implementation."
+        },
+        {
+          "type": "text",
+          "content": "Architecture describes attributes visible to the programmer — instruction set, number of bits for data representation, I/O mechanisms, and addressing techniques."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Instruction set (e.g., is there a multiply instruction?)",
+            "Number of bits used for data representation",
+            "I/O mechanisms",
+            "Addressing techniques"
+          ]
+        },
+        {
+          "type": "examTip",
+          "content": "Architecture = what the programmer sees. Organization = how it is implemented internally."
+        }
+      ]
+    },
+    {
+      "id": "arch-vs-org",
+      "title": "Architecture vs Organization",
+      "blocks": [
+        {
+          "type": "compare",
+          "left": {
+            "title": "Architecture",
+            "content": [
+              "Attributes visible to the programmer",
+              "Instruction set, data representation, I/O, addressing",
+              "Also called ISA (Instruction Set Architecture)",
+              "Example: Is there a multiply instruction?"
+            ]
+          },
+          "right": {
+            "title": "Organization",
+            "content": [
+              "How features are physically implemented",
+              "Control signals, interfaces, memory technology",
+              "Example: Is multiply done by a dedicated unit or by repeated addition?",
+              "Can change across chip generations without changing architecture"
+            ]
+          }
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "title": "Real-World Example: Intel x86",
+          "content": "All Intel processors (8086 → Core i9) share the same x86 architecture (ISA) but differ in organization — number of cores, cache size, clock speed, manufacturing process (e.g., 14nm vs 7nm)."
+        },
+        {
+          "type": "text",
+          "content": "A family of computers can share the same architecture while having different organizations — leading to different price and performance characteristics."
+        },
+        {
+          "type": "examTip",
+          "content": "ISA (Instruction Set Architecture) is often used interchangeably with Architecture. ISA defines instruction formats, opcodes, registers, memory effects, and instruction execution control."
+        }
+      ]
+    },
+    {
+      "id": "structure-function",
+      "title": "Structure & Function",
+      "blocks": [
+        {
+          "type": "compare",
+          "left": {
+            "title": "Structure",
+            "content": [
+              "The way in which components relate to each other",
+              "Physical/logical arrangement of parts"
+            ]
+          },
+          "right": {
+            "title": "Function",
+            "content": [
+              "The operation of individual components as part of the structure",
+              "What each component does"
+            ]
+          }
+        },
+        {
+          "type": "text",
+          "content": "There are four fundamental computer functions:"
+        },
+        {
+          "type": "table",
+          "headers": ["Function", "Description"],
+          "rows": [
+            ["Data Processing", "Performing arithmetic/logical operations on data of various forms"],
+            ["Data Storage", "Short-term (RAM, on-the-fly) and long-term (files on disk)"],
+            ["Data Movement", "I/O with peripherals or data communication with remote devices"],
+            ["Control", "CPU manages execution order, resource access, memory, and I/O"]
+          ]
+        },
+        {
+          "type": "definition",
+          "term": "Input–Output (I/O)",
+          "definition": "Data transfer between the computer and a directly connected peripheral device."
+        },
+        {
+          "type": "definition",
+          "term": "Data Communications",
+          "definition": "Data transfer over longer distances to or from a remote device."
+        },
+        {
+          "type": "text",
+          "content": "Control – Resource Management includes: accessing memory, controlling I/O devices, and allocating processing power."
+        }
+      ]
+    },
+    {
+      "id": "von-neumann",
+      "title": "Von Neumann Computer Architecture",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "The Von Neumann architecture is the foundational model for modern computers. It consists of a CPU, memory, and I/O — all connected by buses."
+        },
+        {
+          "type": "list",
+          "items": [
+            "CPU: Contains ALU, Control Unit, and Registers",
+            "Main Memory: Stores both instructions and data",
+            "I/O Devices: Keyboard, mouse, display, network, storage",
+            "System Bus: Connects CPU, memory, and I/O"
+          ]
+        },
+        {
+          "type": "text",
+          "content": "Key IAS Registers inside the CPU:"
+        },
+        {
+          "type": "table",
+          "headers": ["Register", "Full Name", "Purpose"],
+          "rows": [
+            ["AC", "Accumulator", "Holds intermediate arithmetic results"],
+            ["MQ", "Multiplier-Quotient Register", "Used in multiplication/division"],
+            ["MBR", "Memory Buffer Register", "Holds data being transferred to/from memory"],
+            ["MAR", "Memory Address Register", "Holds address of memory location to access"],
+            ["IR", "Instruction Register", "Holds the currently executing instruction"],
+            ["PC", "Program Counter", "Holds address of the next instruction to fetch"]
+          ]
+        },
+        {
+          "type": "examTip",
+          "content": "Know all 6 IAS registers, their abbreviations, and their roles — frequently tested."
+        }
+      ]
+    },
+    {
+      "id": "instruction-cycle",
+      "title": "Instruction Cycle (Fetch-Decode-Execute)",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "The Instruction Cycle is the basic operational process of a Von Neumann computer. It has two main phases: Fetch and Execute."
+        },
+        {
+          "type": "steps",
+          "items": [
+            "FETCH: CPU reads the instruction from memory at the address stored in PC",
+            "LOAD: Instruction is placed into the Instruction Register (IR)",
+            "INCREMENT: PC is incremented to point to the next instruction (unless a jump occurs)",
+            "DECODE: Control unit decodes the instruction — identifies opcode and operands",
+            "EXECUTE: The decoded instruction is carried out by ALU or control unit",
+            "REPEAT: Cycle restarts from Fetch"
+          ]
+        },
+        {
+          "type": "text",
+          "content": "Types of Execute Cycle operations:"
+        },
+        {
+          "type": "table",
+          "headers": ["Execute Type", "Description", "Example"],
+          "rows": [
+            ["Processor–Memory", "Data transfer between CPU and main memory", "Load/Store instructions"],
+            ["Processor–I/O", "Data transfer between CPU and I/O module", "Reading from keyboard"],
+            ["Data Processing", "Arithmetic or logical operation on data", "ADD, SUB, AND"],
+            ["Control", "Alteration of instruction sequence", "JMP (jump instruction)"],
+            ["Combination", "Mix of above types", "Complex operations"]
+          ]
+        },
+        {
+          "type": "examTip",
+          "content": "Fetch Cycle sequence: PC → MAR → Memory → MBR → IR → PC incremented. This register flow is a common exam question."
+        }
+      ]
+    },
+    {
+      "id": "language-hierarchy",
+      "title": "Hierarchy of Programming Languages",
+      "blocks": [
+        {
+          "type": "compare",
+          "left": {
+            "title": "High-Level Languages",
+            "content": [
+              "e.g., C, C++, Java, Python",
+              "Human-readable, portable across platforms",
+              "Compiled by a compiler to machine code",
+              "Faster development, easier maintenance",
+              "One statement = many machine instructions"
+            ]
+          },
+          "right": {
+            "title": "Low-Level Languages",
+            "content": [
+              "Machine Language: binary (1s and 0s), executed directly by hardware",
+              "Assembly Language: human-readable mnemonics",
+              "One-to-one correspondence with machine instructions",
+              "NOT portable across different architectures"
+            ]
+          }
+        },
+        {
+          "type": "definition",
+          "term": "Assembler",
+          "definition": "A tool that translates assembly language code into machine code (binary)."
+        },
+        {
+          "type": "definition",
+          "term": "Compiler",
+          "definition": "A tool that translates high-level language programs into machine code — either directly or indirectly via an assembler."
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "title": "Translation Example",
+          "content": "D = A * B + 10 in C compiles to: mov eax, A / mul B / add eax, 10 / mov D, eax in x86 Assembly, which becomes hex machine code like A1 00404000..."
+        },
+        {
+          "type": "examTip",
+          "content": "Assembly language is NOT portable — it is tied to a specific CPU architecture. High-level languages are portable because compilers handle architecture differences."
+        }
+      ]
+    },
+    {
+      "id": "why-assembly",
+      "title": "Why Learn Assembly Language?",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Accessibility to system hardware — useful for writing device drivers and embedded systems",
+            "Space efficiency — write compact, optimized code",
+            "Time efficiency — understand and tune program performance",
+            "Understanding sources of program inefficiency"
+          ]
+        },
+        {
+          "type": "compare",
+          "left": {
+            "title": "Assembly Language Best For",
+            "content": [
+              "Device drivers and OS kernels",
+              "Embedded systems (microcontrollers)",
+              "Performance-critical code sections",
+              "Hardware-level programming"
+            ]
+          },
+          "right": {
+            "title": "High-Level Languages Best For",
+            "content": [
+              "Application software (web, desktop, mobile)",
+              "Rapid development and maintenance",
+              "Cross-platform compatibility",
+              "Large-scale software projects"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "multicore",
+      "title": "Multi-Core Structure",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": ["Term", "Definition"],
+          "rows": [
+            ["CPU", "Portion of the computer that fetches and executes instructions; contains ALU, control unit, and registers"],
+            ["Processor", "A physical silicon chip containing one or more cores; interprets and executes instructions"],
+            ["Core", "An individual processing unit on a processor chip; functionally equivalent to a single-CPU system"],
+            ["Multicore Processor", "A processor chip containing multiple cores"]
+          ]
+        },
+        {
+          "type": "text",
+          "content": "A Core consists of: Arithmetic & Logic Unit (ALU), Instruction logic, Load/Store logic, L1 data cache, L1 instruction cache, and L2 cache."
+        },
+        {
+          "type": "definition",
+          "term": "Cache",
+          "definition": "A small, fast memory layer between the processor and main memory. Stores frequently used data to speed up access. Organized in levels: L1 (closest to core, fastest) → L2 → L3 (shared, largest but slowest among cache levels)."
+        },
+        {
+          "type": "examTip",
+          "content": "Know the difference: CPU (logical concept) vs Processor (physical chip) vs Core (individual processing unit on a chip)."
+        }
+      ]
+    },
+    {
+      "id": "instruction-parallelism",
+      "title": "Instruction-Level Parallelism & SIMD",
+      "blocks": [
+        {
+          "type": "definition",
+          "term": "Instruction-Level Parallelism (ILP)",
+          "definition": "The ability of a modern processor to execute multiple instructions simultaneously. Early processors (e.g., Intel 8086) needed 3–10 cycles per instruction; modern processors sustain 2–4 instructions per cycle."
+        },
+        {
+          "type": "definition",
+          "term": "SIMD (Single Instruction, Multiple Data)",
+          "definition": "Special hardware that allows a single instruction to perform multiple parallel operations. Example: Intel/AMD processors can add 8 pairs of single-precision floats simultaneously with one instruction."
+        }
+      ]
+    },
+    {
+      "id": "instruction-format",
+      "title": "Instruction Format",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "An instruction word is divided into fields that tell the CPU what to do and what data to use."
+        },
+        {
+          "type": "table",
+          "headers": ["Field", "Purpose", "Examples"],
+          "rows": [
+            ["Opcode", "Specifies the operation to perform", "ADD, MOV, SUB, JMP"],
+            ["Operand(s)", "Specifies data or addresses to use", "Registers, memory addresses, immediate values"]
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "title": "Instruction Format Layout",
+          "content": "[ Opcode | Operand(s) ] — The opcode field defines WHAT to do; the operand field defines WHERE the data is or WHAT the data is."
+        },
+        {
+          "type": "examTip",
+          "content": "A program is a sequence of instructions. Each instruction requires a different set of control signals to execute."
+        }
+      ]
+    },
+    {
+      "id": "intel-x86",
+      "title": "Intel x86 Architecture",
+      "blocks": [
+        {
+          "type": "text",
+          "content": "The x86 is the most widely used ISA in personal computers and servers."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Began with 8-bit Intel 8086 in 1978",
+            "Evolved through 16-bit, 32-bit, to today's 64-bit processors (Core i3, i5, i7, i9)",
+            "All models share the same x86 ISA — ensures code compatibility across generations",
+            "Clones developed by AMD and Cyrix support the same architecture with different organization",
+            "Architecture spans from tablets to supercomputers"
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "success",
+          "title": "Key Takeaway",
+          "content": "Same architecture (x86 ISA) but different organizations across generations — this is why old software still runs on modern Intel chips."
+        }
+      ]
+    }
+  ]
+}
